@@ -1,5 +1,7 @@
 package com.alteza.linkedList;
 
+import java.util.Stack;
+
 /**
  * 单向链表
  */
@@ -19,13 +21,93 @@ public class SingleLinkedListDemo {
 
         SingleLinkedList list = new SingleLinkedList();
         list.addByOrder(heroNode1);
-        list.addByOrder(heroNode4);
         list.addByOrder(heroNode2);
         list.addByOrder(heroNode3);
+        list.addByOrder(heroNode4);
 
-        list.delete(1);
+//        list.delete(1);
+//        HeroNode heroNode = find(heroNode1, 2);
+//        System.out.println(heroNode);
 
+//        reverse(list.getHead());
+//        reverse2(list.getHead());
+        reverserPrint(list.getHead());
         list.list();
+    }
+
+    //获取单链表倒数第k个节点
+    public static HeroNode find(HeroNode node, int index) {
+        if (node.next == null) {
+            System.out.println("链表为空");
+        }
+        int size = getLength(node);
+        HeroNode cur = node.next;
+        for (int i = 0; i < size - index; i++) {
+            cur = cur.next;
+        }
+        return cur;
+    }
+
+    //获取单链表的节点个数
+    public static int getLength(HeroNode node) {
+        if (node.next == null) {
+            System.out.println("链表为空");
+        }
+        int length = 0;
+        HeroNode cur = node.next;
+        while (cur != null) {
+            length++;
+            cur = cur.next;
+        }
+        return length;
+    }
+
+    //反转
+    public static void reverse(HeroNode node) {
+        if (node.next == null) {
+            System.out.println("链表为空");
+        }
+        HeroNode fNode = node.next;
+        HeroNode sNode = fNode.next;
+        while (sNode != null) {
+            fNode.next = sNode.next;
+            sNode.next = node.next;
+            node.next = sNode;
+            sNode = fNode.next;
+        }
+    }
+
+    //反转2
+    public static void reverse2(HeroNode node) {
+        if (node.next == null) {
+            System.out.println("链表为空");
+        }
+        HeroNode cur = node.next;
+        HeroNode newNode = new HeroNode(0, "", "");
+        while (cur != null) {
+            HeroNode next = cur.next;
+            cur.next = newNode.next;
+            newNode.next = cur;
+            cur = next;
+        }
+        node.next = newNode.next;
+    }
+
+    //逆序打印 栈 先进后出
+    public static void reverserPrint(HeroNode node) {
+        if (node.next == null) {
+            System.out.println("链表为空");
+        }
+        Stack<HeroNode> stack = new Stack<>();
+        HeroNode cur = node.next;
+        while (cur != null) {
+            stack.push(cur);
+            cur = cur.next;
+        }
+        //
+        while (stack.size() > 0) {
+            System.out.println(stack.pop());
+        }
     }
 
 }
@@ -35,6 +117,11 @@ class SingleLinkedList {
 
     //先初始化头节点 不存法国具体数据
     private HeroNode head = new HeroNode(0, "", "");
+
+    // 返回头节点
+    public HeroNode getHead() {
+        return head;
+    }
 
     //添加方法
     // 思路：当不考虑编号顺序：找到链表的最后节点，将最后这个节点的next指向新的节点
