@@ -23,6 +23,8 @@ public class SingleLinkedListDemo {
         list.addByOrder(heroNode2);
         list.addByOrder(heroNode3);
 
+        list.delete(1);
+
         list.list();
     }
 
@@ -90,6 +92,55 @@ class SingleLinkedList {
             //插入
             node.next = temp.next;
             temp.next = node;
+        }
+
+    }
+
+    //修改
+    public void update(HeroNode node) {
+        //判断聊表是否为空
+        if (head.next == null) {
+            System.out.println("聊表为空");
+            return;
+        }
+        HeroNode temp = head;
+        boolean flag = false;
+        while (true) {
+            if (temp == null) {
+                break;//已经遍历完
+            }
+            if (temp.no == node.no) {
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+        }
+        if (flag) {
+            temp.name = node.name;
+            temp.nickname = node.nickname;
+        } else {
+            System.out.println("没有找到");
+        }
+    }
+
+    //删除
+    public void delete(int no) {
+        HeroNode temp = head;
+        boolean flag = false;
+        while (true) {
+            if (temp.next == null) {
+                break;
+            }
+            if (temp.next.no == no) {
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+        }
+        if (flag) {
+            temp.next = temp.next.next;
+        } else {
+            System.out.println("没有找到");
         }
 
     }
