@@ -1,5 +1,7 @@
 package com.alteza.sort;
 
+import java.util.Arrays;
+
 /**
  * 插入排序
  *
@@ -10,7 +12,7 @@ public class InsertSort {
     public static void main(String[] args) {
         int[] arr = {101, 34, 119, 11, 22, 3};
         insertSort(arr);
-        System.out.println(arr);
+        System.out.println(Arrays.toString(arr));
     }
 
     public static void insertSort(int[] arr) {
