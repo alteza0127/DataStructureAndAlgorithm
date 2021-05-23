@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 /**
  * 选择排序
+ *
+ * @author Alteza
  */
 public class SelectSort {
 
