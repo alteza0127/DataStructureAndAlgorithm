@@ -2,6 +2,12 @@ package com.alteza.sort;
 
 /**
  * 希尔排序
+ * 希尔排序是把记录按下下标的一定增量分组，对魅族使用直接排序算法排序；随着增量逐渐减少
+ * 每组包含的关键词越来越多，当前增量减至1，整个儿文件分成一组，算法便终止
+ * <p>
+ * https://zhuanlan.zhihu.com/p/34914588
+ *
+ * @author Alteza
  */
 public class ShellSort {
 
@@ -73,6 +79,26 @@ public class ShellSort {
 //        }
 //        System.out.println(Arrays.toString(arr));
 
+    }
+
+    /**
+     * 优化
+     */
+    public static void shellSort2(int[] arr) {
+        for (int gap = arr.length / 2; gap > 0; gap /= 2) {
+            for (int i = gap; i < arr.length; i++) {
+                int j = i;
+                int temp = arr[j];
+                if (arr[j] < arr[j - gap]) {
+                    while (j - gap >= 0 && temp < arr[j - gap]) {
+                        arr[j] = arr[j - gap];
+                        j -= gap;
+                    }
+                    arr[j] = temp;
+                }
+            }
+        }
+        System.out.println(arr);
     }
 
 }
